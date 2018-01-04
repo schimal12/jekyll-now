@@ -8,9 +8,9 @@ permalink: /about/
 
 In this section I will post several webpages that are related to Cybersecurity Education and/or Practice. 
 
-- Root Me: Capture the Flag. (https://www.root-me.org/)
+1. Root Me: Capture the Flag. (https://www.root-me.org/)
 
-1. Here we will find several trials of different types
+* Here we will find several trials of different types
   * App Script.
   * App System. 
   * Cracking.
