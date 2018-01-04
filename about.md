@@ -8,7 +8,7 @@ permalink: /about/
 
 In this section I will post several webpages that are related to Cybersecurity Education and/or Practice. 
 
-1. Root Me: Capture the Flag. (https://www.root-me.org/)
+Root Me: Capture the Flag. (https://www.root-me.org/)
 
 * Here we will find several trials of different types
   * App Script.
@@ -23,7 +23,8 @@ In this section I will post several webpages that are related to Cybersecurity E
   * Web - Client.
   * Web - Server.
 
-2. Expoit Exercises (https://exploit-exercises.com/)
+ Exploit Exercises (https://exploit-exercises.com/)
+ 
   * Here we will find a variety of virtual machines, documentation and challenges that can be used to learn about a 
 variety of computer security issues such as privilege escalation, vulnerability analysis, exploit development, debugging, 
 reverse engineering, and general cyber security issues.
