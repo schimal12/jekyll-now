@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-#Education. 
+##Education 
 
 In this section I will post several webpages that are related to Cybersecurity Education and/or Practice. 
 
