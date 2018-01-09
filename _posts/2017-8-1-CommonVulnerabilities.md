@@ -22,18 +22,8 @@ All programs are stored in memory.
 
 Location of data areas
  
-set when process starts | cmdline &env  | 0xffffffff
-                        | ------------- |
-                 /----- | Stack         | int f() { int x; .... } 
-      Runtime-->/------ | ------------- |
-               /------- | Heap          | malloc (sizeof(long)); 
-                        | ------------- |
-           Known /----- | Uninit'd data | static int y;
-   at compile-->/------ | init'd data   | static const int y = 11
-          time /------- | Text          | 0x00000000
          
-         
-         
+                                | ------------- |
         set when process starts | cmdline &env  |  0xffffffff
                                 | ------------- |
                          /----- | Stack         | int f() { int x; .... } 
@@ -41,8 +31,11 @@ set when process starts | cmdline &env  | 0xffffffff
                        /------- | Heap          | malloc (sizeof(long)); 
                                 | ------------- |
                    Known /----- | Uninit'd data | static int y;
+                                | ------------- |
            at compile-->/------ | init'd data   | static const int y = 11
+                                | ------------- |
                   time /------- | Text          | 0x00000000
+                                | ------------- |
                   
                   
 Vulnerabilities in C are related to buffer overflows and string manipulation. This would result in a segmentation fault. 
