@@ -1,11 +1,10 @@
 ---
 layout: post
-title: Common Vulnerabilities in C 
+title: Memory Layout 
 category: [programming]
 tags: [c,programming, vulnerability, coursera, week1]
 ---
 
-## Memory Layout
 
 # Location of data areas
  
