@@ -37,8 +37,53 @@ Location of data areas
                   time /------- | Text          | 0x00000000
                                 | ------------- |
                   
-                  
-Vulnerabilities in C are related to buffer overflows and string manipulation. This would result in a segmentation fault. 
+ 
+ 
+In the memory allocation the stack and the heap grow in opposite directions. So the compiler will emit instructions and adjust the size of the stack at run-time. 
+
+Example
+  
+     | 0x00000000    |               |               |               |               | 0xffffffff   |
+     | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |
+     | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |
+     | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |
+     | heap          |               |  3            | 2             | 1             | Stack        |
+     | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |
+     | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |
+     | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |
+
+
+     | By Malloc     |               |  push 3       | push 2        | push 1        | StackPointer | 
+     | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |
+
+====== 
+
+- push 1 
+- push 2 
+- push 3 
+- return 
+
+======
+
+This would be the order in which the instructions enter the stack, since the arguments are pushed in reverse order of the code. 
+                               
+                               
+Summary of Stack and functions: 
+
+1. Calling Function
+- Push arguments onto the stack (in reverse). 
+- Push the return address, for example the address of the instructions you want to run after control returns to you. 
+- Jump to the function address 
+
+
+
+
+                                    
+
+
+                                                                                 
+                                                                                 
+Vulnerabilities in C are related to buffer overflows and string manipula tion. This would result in a segmentation fault. 
 
 Here are some common errors and the suggested solutions. 
 
