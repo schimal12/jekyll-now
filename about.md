@@ -30,3 +30,7 @@ reverse engineering, and general cyber security issues.
   * Nebula:  Simple and intermediate challenges that cover Linux privilege escalation, common scripting language issues, and file system race conditions.
   * Protostar:  Introduces basic memory corruption issues such as buffer overflows, format strings and heap exploitation under “old-style” Linux system that does not have any form of modern exploit mitigiation systems enabled.
   * Fusion: Memory corruption, format strings and heap exploitation but this time focusing on more advanced scenarios and modern protection system.
+
+Introduction to reverse engineering and Assembly (http://kakaroto.homelinux.net/2017/11/introduction-to-reverse-engineering-and-assembly/) 
+
+* In this blog entry we can found all the information implicated with Reverse Engineering with Assembly language. 
