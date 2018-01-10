@@ -31,7 +31,9 @@ int func(char *str){
      | ------- | ------------- | ------------- | ------------- | ------------ |
 
 So, if we see the variable "mystring" has 7 characters but the buffer in func() only allows 4 characters. So, after allocating 
-the variables, the stack would look like this. 
+the variables, the stack would look like this. Pay attention that %ebp value has been replaced by "!!!\0". 
+
+Note: \0 is the end of an string. 
 
      | ------- | ------------- | ------------- | ------------- | 0xffffffff   |
      | ------- | ------------- | ------------- | ------------- | ------------ |
