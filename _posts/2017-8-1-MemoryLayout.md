@@ -5,8 +5,10 @@ category: [programming]
 tags: [c,programming, vulnerability, coursera, week1]
 ---
 
+When a program is running, it is called a process. Each process owns it own memory, here we will see how the memory layout is in a 32 bit architecture. 
 
-# Location of data areas
+# Location of data areas 
+
  
          
                                 | ------------- |
@@ -46,6 +48,7 @@ So at the beginning, the Stack Pointer is in its original position, after the in
 Example of the movement of the Stack Pointer  
 
 ====== 
+
 -----------> Stack Pointer (%esp)
 
 ======
@@ -141,7 +144,83 @@ Here, we will know that the "localv2" variable is 8 bytes distant from the %ebp.
 
 # Returning from functions. 
 
+```
+int main(){
+ ....
+ func("Hey",10,9);
+ ....
+}
+```
 
+In this step, we see the stack frame for "func" function. 
+
+     | ------------- | ------------- | ------- | ------------- | ------------- | ------------- |
+     | ------------- | ------------- | ------- | ------------- | ------------- | ------------- |
+     | localv2       | localv1       | ??????? | args1         | args2         | args3         | 
+     | ------------- | ------------- | %ebp    | ------------- | ------------- | ------------- | 
+     | ------------- | ------------- | ------- | ------------- | ------------- | ------------- |
+
+
+Now let's see the stack frame with the caller data, from main. 
+
+
+     | ------------- | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+     | ------------- | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+     | localv2       | localv1       | ??????? | args1         | args2         | args3         | CallersData  |     
+     | ------------- | ------------- | ebp     | ------------- | ------------- | ------------- | ebp          |
+     | ------------- | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+
+
+Here we see the %ebp for the stack frame of func() and the %ebp for the Caller's data from main(). So in this moment main() is using the %ebp for its own local variables. The main issue with the returning concept is that after calling and returning the value from func() we want to be at the same position that %ebp from main() was. 
+
+How do we restore %ebp? 
+
+First, the three arguments from func() will be pushed into the stack
+
+     | ------------- | ------------- | ------------- | ------------ |
+     | ------------- | ------------- | ------------- | ------------ |
+     | args1         | args2         | args3         | CallersData  |     
+     | ------------- | ------------- | ------------- | ebp          |
+     | ------------- | ------------- | ------------- | ------------ |
+
+At this moment, the stack pointer is here: 
+
+      | ------- | ------------- | ------------- | ------------- | ------------ |
+      | ------- | ------------- | ------------- | ------------- | ------------ |
+      | ??????? | args1         | args2         | args3         | CallersData  |     
+      | esp     | ------------- | ------------- | ------------- | ebp          |
+      | ------- | ------------- | ------------- | ------------- | ------------ |
+
+
+
+So, the next step is to push frame pointer right after. 
+
+
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+     | ebp           | ??????? | args1         | args2         | args3         | CallersData  |     
+     | esp           |         | ------------- | ------------- | ------------- | ebp          |
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+
+And after that set %ebp to current (%esp)
+
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+     | ebp           | ??????? | args1         | args2         | args3         | CallersData  |     
+     | ebp           |         | ------------- | ------------- | ------------- | ebp          |
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+
+So now the frame pointer is in the memory address were the stack pointer was. We do that, since we need to save the memory address of the stack pointer, since with every insertion of local variables the stack pointer will move forward. 
+
+After that, we need to set the instruction pointer %eip before call in the position of 4 before %ebp. 
+
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+     | ebp           | eip     | args1         | args2         | args3         | CallersData  |     
+     | ebp           |         | ------------- | ------------- | ------------- | ebp          |
+     | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
+
+By pushing %eip before func() calling, we save the previous %ebp of main(). So when func() returns it will pop 4(%ebp)
 
 
 Summary of Stack and functions: 
