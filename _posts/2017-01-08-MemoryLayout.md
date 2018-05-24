@@ -5,7 +5,6 @@ category: [programming]
 tags: [c,programming, vulnerability, coursera, week1]
 ---
 
-When a program is running, it is called a process. Each process owns it own memory, here we will see how the memory layout is in a 32 bit architecture. 
 
 # Location of data areas 
 
@@ -47,35 +46,35 @@ So at the beginning, the Stack Pointer is in its original position, after the in
 
 Example of the movement of the Stack Pointer  
 
-====== 
+============ 
 
 -----------> Stack Pointer (%esp)
 
-======
+============
 
-====== 
+============ 
 
-- push 1 
+- push 1<br/>
 -----------> Stack Pointer(%esp)
 
-======
+============
 
-====== 
+============ 
+
+- push 1 
+- push 2<br/>
+-----------> Stack Pointer(%esp)
+
+============
+
+============ 
 
 - push 1 
 - push 2
+- push 3<br/>
 -----------> Stack Pointer(%esp)
 
-======
-
-====== 
-
-- push 1 
-- push 2
-- push 3
------------> Stack Pointer(%esp)
-
-======                          
+============                          
                    
 
 Now, assuming that the function reach a return in the code, what the function is going to do is to "pop" all the variables into the stack and set the Stack Pointer to the original position, just before the function started to push all the variables. 
