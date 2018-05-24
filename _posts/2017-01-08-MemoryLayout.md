@@ -103,9 +103,10 @@ For the variable allocation, they are up to the compiler, they can be allocated 
 # Accessing the variables. 
 
 ```
-void func(char \*arg1, int arg2, int arg3){
+void func(char \*args1, int args2, int args3){
    ....
-   local2++;
+   localv1;
+   localv2;
    ...
 }
 ```
@@ -146,7 +147,7 @@ Here, we will know that the "localv2" variable is 8 bytes distant from the %ebp.
 ```
 int main(){
  ....
- func("Hey",10,9);
+ func(11,10,9);
  ....
 }
 ```
@@ -158,6 +159,7 @@ In this step, we see the stack frame for "func" function.
      | localv2       | localv1       | ??????? | args1         | args2         | args3         | 
      | ------------- | ------------- | %ebp    | ------------- | ------------- | ------------- | 
      | ------------- | ------------- | ------- | ------------- | ------------- | ------------- |
+
 
 
 Now let's see the stack frame with the caller data, from main. 
@@ -192,7 +194,7 @@ At this moment, the stack pointer is here:
 
 
 
-So, the next step is to push frame pointer right after. 
+So, the next step is to push frame pointer right after the stack pointer. 
 
 
      | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
@@ -220,6 +222,9 @@ After that, we need to set the instruction pointer %eip before call in the posit
      | ------------- | ------- | ------------- | ------------- | ------------- | ------------ |
 
 By pushing %eip before func() calling, we save the previous %ebp of main(). So when func() returns it will pop 4(%ebp)
+
+Example of returning function in assembly: 
+
 
 
 Summary of Stack and functions: 
