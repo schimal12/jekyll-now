@@ -2,7 +2,7 @@
 layout: post
 title: Infection of DLL Main API. X86 Assembly explanation. 
 category: [Reverse engineering]
-tags: [c,programming, reverseengineering, coursera]
+tags: [c,programming, reverse-engineering]
 ---
 
 
